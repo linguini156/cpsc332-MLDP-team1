@@ -77,7 +77,7 @@ print("Outer scope: " + outer);
 
 Implementation Section:
 
-## Implementation Considerations:
+**Implementation Considerations:**
 This imperative design builds on our Module 2 grammar work, where we established operator precedence (or > and > equality > comparison > term > factor > unary > primary) and resolved the dangling else ambiguity. The layered expression structure from our parse tree directly supports the left-to-right evaluation model described above.
 
 **Performance characteristics:**
