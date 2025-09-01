@@ -15,10 +15,23 @@ State & memory management:
 - expressions evaluate left-to-right
 - blocks create new scope for declarations
 
+Memory Lifecycle Details:
+- **Variable creation**: Variables come into existence when `let` is encountered
+- **Scope management**: Each `{...}` block creates a new scope that inherits from its parent
+- **Automatic cleanup**: Variables are automatically deallocated when leaving their scope
+- **Expression temporaries**: Intermediate values in expressions are handled automatically
+  
 Sequential logic/control flow:
 - statements execute top-to-bottom within the block
 - if binds to the nearest else
 - while loop repeats until the condition is false or break is indicated
+
+Execution Model Details:
+- **Sequential execution**: Statements execute in textual order within blocks
+- **Conditional branching**: `if` statements can alter execution flow based on boolean expressions
+- **Loop iteration**: `while` loops repeat until condition becomes false
+- **Block boundaries**: `{...}` creates execution contexts with local variable visibility
+
 
 Main program example:
 
@@ -45,3 +58,30 @@ let b = false;
 if (a and (b or (total > 10))) {
   print("logic branch taken");
 }
+
+//Nested Scope Example:
+let outer = 10;
+{
+let inner = 20;
+let total = outer + inner; // Can access both outer and inner
+print("Inner scope: " + total);
+
+   if (total > 25) {
+       let temp = total * 2;    // Another nested scope
+       print("Deep scope: " + temp);
+   }
+   // temp is no longer accessible here
+}
+// inner and total are no longer accessible here
+print("Outer scope: " + outer);
+
+Implementation Section:
+
+## Implementation Considerations:
+This imperative design builds on our Module 2 grammar work, where we established operator precedence (or > and > equality > comparison > term > factor > unary > primary) and resolved the dangling else ambiguity. The layered expression structure from our parse tree directly supports the left-to-right evaluation model described above.
+
+**Performance characteristics:**
+- Variable access: O(1) lookup within current scope using symbol tables
+- Scope resolution: Linear search through scope chain for inherited variables  
+- Memory efficiency: Stack allocation for local variables ensures automatic cleanup
+
