@@ -1,4 +1,4 @@
-# Functional Feaatures Reflection – Team 1
+# Functional Features Reflection – Team 1
 
 ## Will Our Custom Language Support Functional Features?
 
