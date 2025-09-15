@@ -6,7 +6,10 @@ program : stmt* EOF ;
 
 stmt
   : varDecl
+  | constDecl
   | assignStmt
+  | funcDecl
+  | return Stmt
   | printStmt
   | ifStmt
   | whileStmt
@@ -16,7 +19,12 @@ stmt
   ;
 
 varDecl     : LET ID ('=' expr)? ';' ;
+constDecl   : CONST ID '=' expr ';' ;
 assignStmt  : ID '=' expr ';' ;
+funcDecl    : purity? FUN ID '(' paramList? ')' block ;
+paramList   : ID (',' ID)* ;
+purity      : PURE ;
+returnStmt  : RETURN expr? ';' ;
 printStmt   : PRINT '(' expr ')' ';' ;
 ifStmt      : IF '(' expr ')' stmt (ELSE stmt)? ;
 whileStmt   : WHILE '(' expr ')' stmt ;
@@ -31,17 +39,27 @@ comparison  : term ( ( '<' | '<=' | '>' | '>=' ) term )* ;
 term        : factor ( ( '+' | '-' ) factor )* ;
 factor      : unary ( ( '*' | '/' | '%' ) unary )* ;
 unary       : ( '!' | '-' ) unary | primary ;
+call        : primary ( '(' argList? ')' )* ;
+argList     : expr (',' expr)* ;
 primary     : NUMBER
             | STRING
             | TRUE
-            | TRUE
+            | FALSE
             | ID
             | '(' expr ')'
+            | arrayLiteral
+            | lambdaExpr
             ;
+arrayLiteral: '[' (expr (',' expr)*)? ']' ;
+lambdaExpr  : '(' paramList? ')' '=>' (expr | block) ; // (x,y)=>x+y or ()=>{ ... }
 
 // lexer rules
 
 LET      : 'let';
+CONST    : 'const';
+FUN      : 'fun';
+PURE     : 'pure';
+RETURN   : 'return';
 IF       : 'if';
 ELSE     : 'else';
 WHILE    : 'while';
