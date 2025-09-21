@@ -2,7 +2,7 @@
 
 ## Type System Design
 
-Our custom programming language will implement a **hybrid type system** combining static type declarations with optional dynamic features. The language will be **statically and strongly typed** as the primary approach, ensuring type safety and compile-time error detection. This provides the reliability benefits of languages like Java and C# while maintaining performance advantages through compile-time optimization.
+Our custom programming language will implement a **hybrid type system** combining static type declarations with optional dynamic features. This felt like best plan for a group of students who want the well rounded approach. The language will be **statically and strongly typed** as the primary approach, ensuring type safety and compile-time error detection. This provides the reliability benefits of languages like Java and C# while maintaining performance advantages through compile-time optimization.
 
 However, we will include a special `dynamic` keyword that allows programmers to opt into dynamic typing for specific variables when needed. This provides flexibility for rapid prototyping and interoperability scenarios while preserving the safety of static typing for the majority of code.
 
