@@ -1,4 +1,4 @@
-grammar Language;
+grammar Sprout;
 
 // ----- parser rules -----
 
